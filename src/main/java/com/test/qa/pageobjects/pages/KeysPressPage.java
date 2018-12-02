@@ -16,4 +16,32 @@ import com.test.qa.pageobjects.utils.PageBase;
  * SrirankanK on 10/3/2018.
  */
 public class KeysPressPage extends PageBase {
+
+	private static final Logger LOGGER = Logger.getLogger(KeysPressPage.class);
+
+	private static By hdrKeysPress = By.xpath("//h3");
+	private static By lblResult = By.id("result");
+
+	public static boolean isKeysPressPageDisplayed() {
+		return getDriver().findElement(hdrKeysPress).isDisplayed();
+	}
+
+	public static void waitTillHeaderLoad() {
+		waiTillVisible(hdrKeysPress, 2);
+	}
+	
+	public static String getResultText() {
+		return getDriver().findElement(lblResult).getText();
+	}
+	
+	public static void enterKeys(int key) {
+		try {
+			Robot robot = new Robot();
+			 robot.keyPress(key);
+			 robot.keyRelease(key);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

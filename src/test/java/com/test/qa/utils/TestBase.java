@@ -19,11 +19,14 @@ import com.test.qa.pageobjects.utils.PageBase;
  */
 public class TestBase {
 	public SoftAssert softAssert;
+	
 	private static final Logger LOGGER = Logger.getLogger(TestBase.class);
+	
 	@BeforeTest
-	public void beforeTest() {
-		System.out.println("Test Running " + this.getClass().toString());
-	}
+    public void beforeTest() {
+        System.out.println("Test Running " + this.getClass().toString());
+    }
+	
 	@BeforeMethod
 	public void loadBrowser() {
 		LOGGER.info("Initiate Browser");
@@ -34,23 +37,26 @@ public class TestBase {
 		}
 		LOGGER.info("Browser Initiated");
 	}
+	
 	@BeforeMethod
-	public void beforeMethod() {
-		softAssert = new SoftAssert();
-	}
-	@BeforeMethod
-	public void nameBefore(Method method) {
-		LOGGER.info("Test name: " + method.getName());
+    public void beforeMethod() { 
+		softAssert = new SoftAssert(); 
 	}
 
-	@AfterMethod
+    @BeforeMethod
+    public void nameBefore(Method method) {
+        LOGGER.info("Test name: " + method.getName());
+    }
+    
+    @AfterMethod
 	public void closeBrowser() {
-		LOGGER.info("Closing Browser");
+    	LOGGER.info("Closing Browser");
 		PageBase.closeDriver();
 		LOGGER.info("Browser Closed");
 	}
-	@AfterMethod
-	public void afterMethod(Method method, ITestResult result) {
-		LOGGER.info("Executed test case name:" + method.getName() + " Execution Results " + result.toString());
-	}
+
+    @AfterMethod
+    public void afterMethod(Method method, ITestResult result) {
+        LOGGER.info("Executed test case name:" + method.getName() + " Execution Results : " + result.toString());
+    }
 }

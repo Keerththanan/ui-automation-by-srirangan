@@ -11,5 +11,15 @@ import com.test.qa.pageobjects.utils.PageBase;
  */
 public class JavaScriptErrorPage extends PageBase {
 
-}
+	private static final Logger LOGGER = Logger.getLogger(JavaScriptErrorPage.class);
 
+	private static By hdrJavaScriptError = By.xpath("//h3");
+
+	public static boolean isJavaScriptErrorPageDisplayed() {
+		return getDriver().findElement(hdrJavaScriptError).isDisplayed();
+	}
+
+	public static void waitTillHeaderLoad() {
+		waiTillVisible(hdrJavaScriptError, 2);
+	}
+}

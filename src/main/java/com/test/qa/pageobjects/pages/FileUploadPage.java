@@ -14,4 +14,35 @@ import java.io.File;
  * on 10/3/2018.
  */
 public class FileUploadPage extends PageBase {
+
+	private static final Logger LOGGER = Logger.getLogger(FileUploadPage.class);
+
+	private static By hdrFileUpload = By.xpath("//h3");
+	private static By btnUpload = By.id("file-upload");
+	private static By btnSubmit = By.id("file-submit");
+	private static By pnlUploadFiles = By.id("uploaded-files");
+
+	public static boolean isFileUploadPageDisplayed() {
+		return getDriver().findElement(hdrFileUpload).isDisplayed();
+	}
+
+	public static void waitTillHeaderLoad() {
+		waiTillVisible(hdrFileUpload, 2);
+	}
+
+	public static void uploadFile(String filename) {
+		getDriver().findElement(btnUpload).sendKeys(PageBase.uploadFilepath+File.separator+ filename);
+	}
+
+	public static void submitFile() {
+		getDriver().findElement(btnSubmit).click();
+	}
+
+	public static String getHeaderValue(){
+		return getDriver().findElement(hdrFileUpload).getText();
+	}
+
+	public static String getUploadedFilesValue() {
+		return getDriver().findElement(pnlUploadFiles).getText();
+	}
 }
